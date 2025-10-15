@@ -1,16 +1,18 @@
 package org.example;
 
 public class Player {
-    private String name;
+    private Menu menu;
     private String representation;
-    public Player(String name, String representation){
-        this.name = name;
+    public Player(String representation){
         this.representation = representation;
     }
-    public String getName(){
-        return name;
-    }
+
+    /**
+     * Method that return the representation of the player "X" or "O"
+     * @return
+     */
     public String getRepresentation(){
         return representation;
     }
+
 }
