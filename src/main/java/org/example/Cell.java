@@ -15,6 +15,9 @@ public class Cell {
         this.player = player;
     }
 
+    public Player getOwner() {
+        return player;
+    }
     /**
      * Method that assume that a cell has no owner
      * @return
