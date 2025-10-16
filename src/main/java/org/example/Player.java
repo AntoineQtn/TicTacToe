@@ -1,8 +1,8 @@
 package org.example;
 
-public class Player {
-    private Menu menu;
+public abstract class Player {
     private String representation;
+
     public Player(String representation){
         this.representation = representation;
     }
@@ -14,5 +14,7 @@ public class Player {
     public String getRepresentation(){
         return representation;
     }
+
+    public abstract int[] move (Cell[][] board);
 
 }

@@ -6,16 +6,13 @@ public class TicTacToe {
     private final Player[] player;
     private final Menu menu;
 
-    public TicTacToe(int size) {
+    public TicTacToe(int size, Player player1, Player player2) {
         this.size = size;
         this.board = new Cell[size][size];
         this.menu = new Menu();
         String representation1 = menu.askForRepresentation();
         String representation2 = representation1.equals("X") ? "O" : "X";
-        this.player = new Player[]{
-                new Player(representation1),
-                new Player(representation2)
-        };
+        this.player = new Player[]{player1, player2};
 
         //initializing an empty cell board
         for (int i = 0; i < size; i++) {
@@ -40,29 +37,6 @@ public class TicTacToe {
         }
     }
 
-    /**
-     * Managing player prompt
-     * @return
-     */
-    public int[] getMoveFromPlayer() {
-        int[] move;
-        while (true) {
-            move = menu.askForPosition();
-            int x = move[0];
-            int y = move[1];
-
-            if (x < 0 || y < 0 || x >= size || y >= size) {
-                System.out.println("Invalid coordinates, try again.");
-                continue;
-            }
-            if (!board[x][y].hasNoOwner()) {
-                System.out.println("Cell already occupied, try again.");
-                continue;
-            }
-            break;
-        }
-        return move;
-    }
 
     /**
      * Method to set the owner of a cell
@@ -82,7 +56,7 @@ public class TicTacToe {
        while (!isOver()){
            display();
            System.out.println("Player " + player[currentPlayerIndex].getRepresentation());
-           int[] move = getMoveFromPlayer();
+           int[] move = player[currentPlayerIndex].move(board);
            setOwner(move[0], move[1], player[currentPlayerIndex]);
            if(isOver()){
                display();
