@@ -1,23 +1,18 @@
-package org.example;
+package org.example.game;
 
 import java.util.Scanner;
 
-public class Menu {
+public class UserInteraction {
     private final Scanner scanner = new Scanner(System.in);
-
-    public Menu(){
-
-    }
 
     public String askForRepresentation() {
         while (true) {
             System.out.print("Welcome to TicTacToe! Please choose your representation (X or O): ");
             String input = scanner.nextLine().trim().toUpperCase();
-
             if (input.equals("X") || input.equals("O")) {
                 return input;
             } else {
-                System.out.println(" Invalid representation! Please type 'X' or 'O'.");
+                System.out.println("Invalid representation! Please type 'X' or 'O'.");
             }
         }
     }

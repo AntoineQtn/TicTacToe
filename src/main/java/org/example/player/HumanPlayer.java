@@ -1,6 +1,9 @@
-package org.example;
+package org.example.player;
 
-public class HumanPlayer extends Player{
+import org.example.game.Cell;
+import org.example.game.UserInteraction;
+
+public class HumanPlayer extends Player {
 
     public HumanPlayer(String representation) {
         super(representation);
@@ -8,10 +11,10 @@ public class HumanPlayer extends Player{
 
     @Override
     public int[] move(Cell[][] board) {
-        Menu menu = new Menu();
+        UserInteraction userInteraction = new UserInteraction();
         int[] move;
         while (true) {
-            move = menu.askForPosition();
+            move = userInteraction.askForPosition();
             int x = move[0];
             int y = move[1];
             if (board[x][y].hasNoOwner()) {

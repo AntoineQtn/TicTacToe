@@ -1,4 +1,6 @@
-package org.example;
+package org.example.player;
+
+import org.example.game.Cell;
 
 import java.util.Random;
 

@@ -1,4 +1,6 @@
-package org.example;
+package org.example.game;
+
+import org.example.player.Player;
 
 public class Cell {
     Player player;

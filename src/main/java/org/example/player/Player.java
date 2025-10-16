@@ -1,4 +1,6 @@
-package org.example;
+package org.example.player;
+
+import org.example.game.Cell;
 
 public abstract class Player {
     private String representation;

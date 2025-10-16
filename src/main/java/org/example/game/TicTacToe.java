@@ -1,16 +1,20 @@
-package org.example;
+package org.example.game;
+
+import org.example.player.Player;
 
 public class TicTacToe {
     private final int size;
     private final Cell[][] board;
     private final Player[] player;
-    private final Menu menu;
+    private final UserInteraction userInteraction;
+    private final View view;
 
     public TicTacToe(int size, Player player1, Player player2) {
         this.size = size;
         this.board = new Cell[size][size];
-        this.menu = new Menu();
-        String representation1 = menu.askForRepresentation();
+        this.userInteraction = new UserInteraction();
+        this.view = new View();
+        String representation1 = userInteraction.askForRepresentation();
         String representation2 = representation1.equals("X") ? "O" : "X";
         this.player = new Player[]{player1, player2};
 
@@ -115,6 +119,15 @@ public class TicTacToe {
             }
         }
     return true;
+    }
+
+    private boolean checkWinner(boolean winner) {
+        if(isOver()){
+            return true;
+        }else if(!winner){
+            return false;
+        }
+        return winner;
     }
 
 }
