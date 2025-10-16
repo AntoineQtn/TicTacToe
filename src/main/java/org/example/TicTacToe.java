@@ -3,14 +3,19 @@ package org.example;
 public class TicTacToe {
     private final int size;
     private final Cell[][] board;
-    private final Player player;
+    private final Player[] player;
     private final Menu menu;
 
     public TicTacToe(int size) {
         this.size = size;
         this.board = new Cell[size][size];
-        this.menu = new Menu(new java.util.Scanner(System.in));
-        this.player = new Player(menu.askForRepresentation());
+        this.menu = new Menu();
+        String representation1 = menu.askForRepresentation();
+        String representation2 = representation1.equals("X") ? "O" : "X";
+        this.player = new Player[]{
+                new Player(representation1),
+                new Player(representation2)
+        };
 
         //initializing an empty cell board
         for (int i = 0; i < size; i++) {
@@ -73,12 +78,21 @@ public class TicTacToe {
      * Method that runs the game
      */
     public void play() {
-        while (!isOver()) {
-            display();
-            int[] move = getMoveFromPlayer();
-            setOwner(move[0], move[1], player);
-            display();
-        }
+       int currentPlayerIndex = 0;
+       while (!isOver()){
+           display();
+           System.out.println("Player " + player[currentPlayerIndex].getRepresentation());
+           int[] move = getMoveFromPlayer();
+           setOwner(move[0], move[1], player[currentPlayerIndex]);
+           if(isOver()){
+               display();
+               System.out.println("Player " + player[currentPlayerIndex].getRepresentation());
+               return;
+           }
+           currentPlayerIndex = (currentPlayerIndex + 1) % player.length;
+       }
+       display();
+        System.out.println("It's a draw");
     }
 
     /**
@@ -126,7 +140,7 @@ public class TicTacToe {
                 }
             }
         }
-    return  true;
+    return true;
     }
 
 }

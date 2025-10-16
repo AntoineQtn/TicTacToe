@@ -3,15 +3,23 @@ package org.example;
 import java.util.Scanner;
 
 public class Menu {
-    Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
-    public Menu(Scanner scanner){
-        this.scanner = scanner;
+    public Menu(){
+
     }
 
-    public String askForRepresentation(){
-        System.out.println("Welcome to TicTacToe ! Please choose your representation : X or O :");
-        return scanner.nextLine();
+    public String askForRepresentation() {
+        while (true) {
+            System.out.print("Welcome to TicTacToe! Please choose your representation (X or O): ");
+            String input = scanner.nextLine().trim().toUpperCase();
+
+            if (input.equals("X") || input.equals("O")) {
+                return input;
+            } else {
+                System.out.println(" Invalid representation! Please type 'X' or 'O'.");
+            }
+        }
     }
 
     public int[] askForPosition() {
