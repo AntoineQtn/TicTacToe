@@ -11,6 +11,3 @@ Environnement :
 - Recommended IDE: IntelliJ IDEA (or any other Gradle-compatible Java IDE).
 - Internet connection: required to download dependencies from Maven Central (JUnit 5).
 
-UML :
-
-![Diagramme de classes TicTacToe](/home/antoine.quintin@Digital-Grenoble.local/Pictures/diagramme_classes.png)
