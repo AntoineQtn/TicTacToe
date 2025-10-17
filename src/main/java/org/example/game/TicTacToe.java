@@ -9,16 +9,16 @@ public class TicTacToe {
     private final UserInteraction userInteraction;
     private final View view;
 
-    public TicTacToe(int size, Player player1, Player player2) {
+    public TicTacToe(int size, Player player1, Player player2, UserInteraction userInteraction) {
         this.size = size;
         this.board = new Cell[size][size];
-        this.userInteraction = new UserInteraction();
+        this.userInteraction = userInteraction; // ← on garde ce qui vient de l’extérieur
         this.view = new View();
         String representation1 = userInteraction.askForRepresentation();
         String representation2 = representation1.equals("X") ? "O" : "X";
         this.player = new Player[]{player1, player2};
 
-        //initializing an empty cell board
+        // Initialisation du plateau vide
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 board[i][j] = new Cell(null);
@@ -26,6 +26,9 @@ public class TicTacToe {
         }
     }
 
+    public TicTacToe(int size, Player player1, Player player2) {
+        this(size, player1, player2, new UserInteraction());
+    }
 
     /**
      * displaying the board according to its size
@@ -118,16 +121,44 @@ public class TicTacToe {
                 }
             }
         }
+
     return true;
     }
 
-    private boolean checkWinner(boolean winner) {
-        if(isOver()){
-            return true;
-        }else if(!winner){
-            return false;
+    public Player getWinner() {
+        for (int i = 0; i < size; i++) {
+            if (!board[i][0].hasNoOwner() &&
+                    board[i][0].getOwner() == board[i][1].getOwner() &&
+                    board[i][1].getOwner() == board[i][2].getOwner()) {
+                return board[i][0].getOwner();
+            }
         }
-        return winner;
+        for (int j = 0; j < size; j++) {
+            if (!board[0][j].hasNoOwner() &&
+                    board[0][j].getOwner() == board[1][j].getOwner() &&
+                    board[1][j].getOwner() == board[2][j].getOwner()) {
+                return board[0][j].getOwner();
+            }
+        }
+        if (!board[0][0].hasNoOwner() &&
+                board[0][0].getOwner() == board[1][1].getOwner() &&
+                board[1][1].getOwner() == board[2][2].getOwner()) {
+            return board[0][0].getOwner();
+        }
+        if (!board[0][2].hasNoOwner() &&
+                board[0][2].getOwner() == board[1][1].getOwner() &&
+                board[1][1].getOwner() == board[2][0].getOwner()) {
+            return board[0][2].getOwner();
+        }
+        return null;
+    }
+
+
+    public int getSize(){
+        return size;
+    }
+    public Cell[][] getBoard() {
+        return board;
     }
 
 }
