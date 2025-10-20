@@ -2,6 +2,7 @@ package org.example.player;
 
 import org.example.game.Cell;
 import org.example.game.UserInteraction;
+import org.example.game.View;
 
 public class HumanPlayer extends Player {
 
@@ -11,7 +12,7 @@ public class HumanPlayer extends Player {
 
     @Override
     public int[] move(Cell[][] board) {
-        UserInteraction userInteraction = new UserInteraction();
+        UserInteraction userInteraction = new UserInteraction(new View());
         int[] move;
         while (true) {
             move = userInteraction.askForPosition();

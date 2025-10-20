@@ -12,13 +12,12 @@ public class TicTacToe {
     public TicTacToe(int size, Player player1, Player player2, UserInteraction userInteraction) {
         this.size = size;
         this.board = new Cell[size][size];
-        this.userInteraction = userInteraction; // ← on garde ce qui vient de l’extérieur
+        this.userInteraction = userInteraction;
         this.view = new View();
         String representation1 = userInteraction.askForRepresentation();
         String representation2 = representation1.equals("X") ? "O" : "X";
         this.player = new Player[]{player1, player2};
 
-        // Initialisation du plateau vide
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 board[i][j] = new Cell(null);
@@ -27,23 +26,8 @@ public class TicTacToe {
     }
 
     public TicTacToe(int size, Player player1, Player player2) {
-        this(size, player1, player2, new UserInteraction());
+        this(size, player1, player2, new UserInteraction(new View()));
     }
-
-    /**
-     * displaying the board according to its size
-     */
-    public void display() {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                System.out.print(board[i][j].getRepresentation());
-                if (j < size - 1) System.out.print("|");
-            }
-            System.out.println();
-            if (i < size - 1) System.out.println("---+---+---");
-        }
-    }
-
 
     /**
      * Method to set the owner of a cell
@@ -59,21 +43,33 @@ public class TicTacToe {
      * Method that runs the game
      */
     public void play() {
-       int currentPlayerIndex = 0;
-       while (!isOver()){
-           display();
-           System.out.println("Player " + player[currentPlayerIndex].getRepresentation());
-           int[] move = player[currentPlayerIndex].move(board);
-           setOwner(move[0], move[1], player[currentPlayerIndex]);
-           if(isOver()){
-               display();
-               System.out.println("Player " + player[currentPlayerIndex].getRepresentation());
-               return;
-           }
-           currentPlayerIndex = (currentPlayerIndex + 1) % player.length;
-       }
-       display();
-        System.out.println("It's a draw");
+        int currentPlayerIndex = 0;
+        view.displayMessage("Welcome to Tic Tac Toe!");
+
+        while (!isOver()) {
+            view.displayBoard(board);
+            Player currentPlayer = player[currentPlayerIndex];
+            view.displayMessage("Player " + currentPlayer.getRepresentation() + ", it's your turn.");
+
+            int[] move = currentPlayer.move(board);
+            setOwner(move[0], move[1], currentPlayer);
+
+            if (isOver()) {
+                view.displayBoard(board);
+                Player winner = getWinner();
+                if (winner != null) {
+                    view.displayWinner(winner);
+                } else {
+                    view.displayDraw();
+                }
+                return;
+            }
+
+            currentPlayerIndex = (currentPlayerIndex + 1) % player.length;
+        }
+
+        view.displayBoard(board);
+        view.displayDraw();
     }
 
     /**
@@ -81,39 +77,34 @@ public class TicTacToe {
      *
      */
     public boolean isOver() {
-        //lines
+        // lignes
         for (int i = 0; i < size; i++) {
             if (!board[i][0].hasNoOwner() &&
                     board[i][0].getOwner() == board[i][1].getOwner() &&
                     board[i][1].getOwner() == board[i][2].getOwner()) {
-                System.out.println("You won !");
                 return true;
             }
         }
-        //columns
+        // colonnes
         for (int j = 0; j < size; j++) {
-            if(!board[0][j].hasNoOwner() &&
-            board[0][j].getOwner() == board[1][j].getOwner() &&
-            board[1][j].getOwner() == board[2][j].getOwner()) {
-                System.out.println("You won !");
-                return  true;
+            if (!board[0][j].hasNoOwner() &&
+                    board[0][j].getOwner() == board[1][j].getOwner() &&
+                    board[1][j].getOwner() == board[2][j].getOwner()) {
+                return true;
             }
         }
-        //first diagonal
+        // diagonales
         if (!board[0][0].hasNoOwner() &&
                 board[0][0].getOwner() == board[1][1].getOwner() &&
                 board[1][1].getOwner() == board[2][2].getOwner()) {
-            System.out.println("You won !");
             return true;
         }
-        //second diagonal
         if (!board[0][2].hasNoOwner() &&
                 board[0][2].getOwner() == board[1][1].getOwner() &&
                 board[1][1].getOwner() == board[2][0].getOwner()) {
-            System.out.println("You won !");
             return true;
         }
-        //full board
+        // plateau plein
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (board[i][j].hasNoOwner()) {
@@ -121,8 +112,7 @@ public class TicTacToe {
                 }
             }
         }
-
-    return true;
+        return true;
     }
 
     public Player getWinner() {

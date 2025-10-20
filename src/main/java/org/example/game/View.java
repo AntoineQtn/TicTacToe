@@ -36,8 +36,13 @@ public class View {
     public void displayWinner(Player winner) {
         displayMessage("Player " + winner.getRepresentation() + " won!");
     }
-
+    public void displayTurn(Player player) {
+        displayMessage("Player " + player.getRepresentation() + ", it's your turn.");
+    }
     public void displayDraw() {
         displayMessage("It's a draw!");
+    }
+    public void displayInvalidMove() {
+        displayMessage("Invalid move! Try again.");
     }
 }
