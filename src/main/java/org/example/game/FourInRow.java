@@ -4,25 +4,32 @@ import org.example.display.UserInteraction;
 import org.example.display.View;
 import org.example.player.Player;
 
-public class TicTacToe extends Game {
+public class FourInRow extends Game {
 
-    public TicTacToe(int size, Player player1, Player player2, UserInteraction userInteraction, View view) {
-        super(size, new Player[]{player1, player2}, userInteraction, view);
+    public FourInRow(int size, Player player1, Player player2, UserInteraction userInteraction, View view) {
+        super(size * (size + 1), new Player[]{player1, player2}, userInteraction, view);
     }
 
-    public TicTacToe(int size, Player player1, Player player2) {
-        super(size, new Player[]{player1, player2}, new UserInteraction(new View()), new View());
+    public FourInRow(int size, Player player1, Player player2) {
+        super(size * (size + 1), new Player[]{player1, player2}, new UserInteraction(new View()), new View());
     }
 
     @Override
     protected void setOwner(int x, int y, Player player) {
+        for (int i = 1; i < getBoard(); i++) {
+            if (getBoard()[x][y - 1] == "   ") {
+                System.out.println("You can't place your pawn here");
+            } else {
+                getBoard()[x][y].setOwner(player);
+            }
+        }
         getBoard()[x][y].setOwner(player);
     }
 
     @Override
-    protected void play() {
+    protected void play(){
         int currentPlayerIndex = 0;
-        view.displayMessage("Welcome to Tic Tac Toe!");
+        view.displayMessage("Welcome to Four in Row!");
 
         while (!isOver()) {
             view.displayBoard(getBoard());
@@ -114,15 +121,15 @@ public class TicTacToe extends Game {
         }
 
         if (!getBoard()[0][0].hasNoOwner() &&
-                getBoard()[0][0].getOwner() == getBoard()[1][1].getOwner() &&
-                getBoard()[1][1].getOwner() == getBoard()[2][2].getOwner()) {
-            return getBoard()[0][0].getOwner();
+                getBoard()[0][0].getOwner() == board[1][1].getOwner() &&
+                board[1][1].getOwner() == board[2][2].getOwner()) {
+            return board[0][0].getOwner();
         }
 
-        if (!getBoard()[0][2].hasNoOwner() &&
-                getBoard()[0][2].getOwner() == getBoard()[1][1].getOwner() &&
-                getBoard()[1][1].getOwner() == getBoard()[2][0].getOwner()) {
-            return getBoard()[0][2].getOwner();
+        if (!board[0][2].hasNoOwner() &&
+                board[0][2].getOwner() == board[1][1].getOwner() &&
+                board[1][1].getOwner() == board[2][0].getOwner()) {
+            return board[0][2].getOwner();
         }
 
         return null;
@@ -137,4 +144,5 @@ public class TicTacToe extends Game {
     protected Cell[][] getBoard() {
         return board;
     }
+
 }

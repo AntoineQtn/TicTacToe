@@ -1,4 +1,4 @@
-package org.example.game;
+package org.example.display;
 
 import org.example.game.Cell;
 import org.example.player.Player;

@@ -1,8 +1,8 @@
 package org.example.player;
 
 import org.example.game.Cell;
-import org.example.game.UserInteraction;
-import org.example.game.View;
+import org.example.display.UserInteraction;
+import org.example.display.View;
 
 public class HumanPlayer extends Player {
 
