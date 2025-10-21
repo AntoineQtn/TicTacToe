@@ -22,26 +22,29 @@ public class View {
     }
 
     public void displayBoard(Cell[][] board) {
-        int size = board.length;
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
                 displayCell(board[i][j].getRepresentation());
-                if (j < size - 1) displayCell("|");
+                if (j < board[i].length - 1) displayCell("|");
             }
             displayNewLine();
-            if (i < size - 1) displayRowSeparator();
+            if (i < board.length - 1) displayRowSeparator();
         }
     }
 
     public void displayWinner(Player winner) {
         displayMessage("Player " + winner.getRepresentation() + " won!");
     }
+
     public void displayTurn(Player player) {
         displayMessage("Player " + player.getRepresentation() + ", it's your turn.");
     }
+
     public void displayDraw() {
         displayMessage("It's a draw!");
     }
+
     public void displayInvalidMove() {
         displayMessage("Invalid move! Try again.");
     }

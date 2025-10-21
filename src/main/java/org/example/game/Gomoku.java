@@ -2,37 +2,34 @@ package org.example.game;
 
 import org.example.display.UserInteraction;
 import org.example.display.View;
-import org.example.player.ArtificialPlayer;
-import org.example.player.HumanPlayer;
 import org.example.player.Player;
 
-public class TicTacToe extends Game {
+public class Gomoku extends Game {
+    private int rows;
+    private int cols;
 
-    public TicTacToe(int size, Player player1, Player player2){
-        super(size,new Player[]{player1,player2});
+    public Gomoku(int rows, int cols, Player player1, Player player2) {
+        super(rows, new Player[]{player1, player2});
+        this.rows = rows;
+        this.cols = cols;
         this.view = new View();
         this.userInteraction = new UserInteraction(view);
-        initializeBoard(size);
+        initializeBoard(rows, cols);
     }
 
-    public TicTacToe(int size, Player player1, Player player2, UserInteraction userInteraction, View view, Cell[][] board ) {
+    public Gomoku(int size, Player player1, Player player2, UserInteraction userInteraction, View view, Cell[][] board) {
         super(size, new Player[]{player1, player2}, userInteraction, view, board);
     }
 
-
-//    public TicTacToe(int size, Player player1, Player player2) {
-//        super(size, new Player[]{player1, player2}, new UserInteraction(new View()), new View(), board);
-//    }
-
-private void initializeBoard(int size) {
-    Cell[][] board = new Cell[size][size];
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            board[i][j] = new Cell(null);
+    private void initializeBoard(int rows, int cols) {
+        Cell[][] board = new Cell[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                board[i][j] = new Cell(null);
+            }
         }
+        setBoard(board);
     }
-    setBoard(board);
-}
 
     @Override
     protected void setOwner(int x, int y, Player player) {
@@ -75,7 +72,10 @@ private void initializeBoard(int size) {
         for (int i = 0; i < getSize(); i++) {
             if (!getBoard()[i][0].hasNoOwner() &&
                     getBoard()[i][0].getOwner() == getBoard()[i][1].getOwner() &&
-                    getBoard()[i][1].getOwner() == getBoard()[i][2].getOwner()) {
+                    getBoard()[i][1].getOwner() == getBoard()[i][2].getOwner() &&
+                    getBoard()[i][2].getOwner() == getBoard()[i][3].getOwner() &&
+                    getBoard()[i][3].getOwner() == getBoard()[i][4].getOwner()
+            ) {
                 return true;
             }
         }
@@ -84,7 +84,9 @@ private void initializeBoard(int size) {
         for (int j = 0; j < getSize(); j++) {
             if (!getBoard()[0][j].hasNoOwner() &&
                     getBoard()[0][j].getOwner() == getBoard()[1][j].getOwner() &&
-                    getBoard()[1][j].getOwner() == getBoard()[2][j].getOwner()) {
+                    getBoard()[1][j].getOwner() == getBoard()[2][j].getOwner() &&
+                    getBoard()[2][j].getOwner() == getBoard()[3][j].getOwner() &&
+                    getBoard()[3][j].getOwner() == getBoard()[4][j].getOwner()) {
                 return true;
             }
         }
@@ -92,27 +94,32 @@ private void initializeBoard(int size) {
         // diagonales
         if (!getBoard()[0][0].hasNoOwner() &&
                 getBoard()[0][0].getOwner() == getBoard()[1][1].getOwner() &&
-                getBoard()[1][1].getOwner() == getBoard()[2][2].getOwner()) {
+                getBoard()[1][1].getOwner() == getBoard()[2][2].getOwner() &&
+                getBoard()[2][2].getOwner() == getBoard()[3][3].getOwner() &&
+                getBoard()[3][3].getOwner() == getBoard()[4][4].getOwner()
+        ) {
             return true;
         }
-
-        Cell[][] board;
-        if (!getBoard()[0][2].hasNoOwner() &&
-                getBoard()[0][2].getOwner() == getBoard()[1][1].getOwner() &&
-                getBoard()[1][1].getOwner() == getBoard()[2][0].getOwner()) {
+//
+//        Cell[][] board;
+        if (!getBoard()[4][0].hasNoOwner() &&
+                getBoard()[4][0].getOwner() == getBoard()[3][1].getOwner() &&
+                getBoard()[3][1].getOwner() == getBoard()[2][2].getOwner() &&
+                getBoard()[2][2].getOwner() == getBoard()[1][3].getOwner() &&
+                getBoard()[1][3].getOwner() == getBoard()[0][4].getOwner()) {
             return true;
         }
+//
+//        // plateau plein
+//        for (int i = 0; i < getSize(); i++) {
+//            for (int j = 0; j < getSize(); j++) {
+//                if (getBoard()[i][j].hasNoOwner()) {
+//                    return false;
+//                }
+//            }
+//        }
 
-        // plateau plein
-        for (int i = 0; i < getSize(); i++) {
-            for (int j = 0; j < getSize(); j++) {
-                if (getBoard()[i][j].hasNoOwner()) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
+        return false;
     }
 
     @Override
@@ -120,7 +127,10 @@ private void initializeBoard(int size) {
         for (int i = 0; i < getSize(); i++) {
             if (!getBoard()[i][0].hasNoOwner() &&
                     getBoard()[i][0].getOwner() == getBoard()[i][1].getOwner() &&
-                    getBoard()[i][1].getOwner() == getBoard()[i][2].getOwner()) {
+                    getBoard()[i][1].getOwner() == getBoard()[i][2].getOwner() &&
+                    getBoard()[i][2].getOwner() == getBoard()[i][3].getOwner() &&
+                    getBoard()[i][3].getOwner() == getBoard()[i][4].getOwner()
+            ) {
                 return getBoard()[i][0].getOwner();
             }
         }
@@ -128,21 +138,27 @@ private void initializeBoard(int size) {
         for (int j = 0; j < getSize(); j++) {
             if (!getBoard()[0][j].hasNoOwner() &&
                     getBoard()[0][j].getOwner() == getBoard()[1][j].getOwner() &&
-                    getBoard()[1][j].getOwner() == getBoard()[2][j].getOwner()) {
+                    getBoard()[1][j].getOwner() == getBoard()[2][j].getOwner() &&
+                    getBoard()[2][j].getOwner() == getBoard()[3][j].getOwner() &&
+                    getBoard()[3][j].getOwner() == getBoard()[4][j].getOwner()) {
                 return getBoard()[0][j].getOwner();
             }
         }
 
         if (!getBoard()[0][0].hasNoOwner() &&
                 getBoard()[0][0].getOwner() == getBoard()[1][1].getOwner() &&
-                getBoard()[1][1].getOwner() == getBoard()[2][2].getOwner()) {
+                getBoard()[1][1].getOwner() == getBoard()[2][2].getOwner() &&
+                getBoard()[2][2].getOwner() == getBoard()[3][3].getOwner() &&
+                getBoard()[3][3].getOwner() == getBoard()[4][4].getOwner()) {
             return getBoard()[0][0].getOwner();
         }
 
-        if (!getBoard()[0][2].hasNoOwner() &&
-                getBoard()[0][2].getOwner() == getBoard()[1][1].getOwner() &&
-                getBoard()[1][1].getOwner() == getBoard()[2][0].getOwner()) {
-            return getBoard()[0][2].getOwner();
+        if (!getBoard()[0][4].hasNoOwner() &&
+                getBoard()[4][0].getOwner() == getBoard()[3][1].getOwner() &&
+                getBoard()[3][1].getOwner() == getBoard()[2][2].getOwner() &&
+                getBoard()[2][2].getOwner() == getBoard()[1][3].getOwner() &&
+                getBoard()[1][3].getOwner() == getBoard()[0][4].getOwner()) {
+            return getBoard()[0][0].getOwner();
         }
 
         return null;
@@ -170,7 +186,7 @@ private void initializeBoard(int size) {
 
     @Override
     protected Player[] getPlayers() {
-        return  super.getPlayers();
+        return super.getPlayers();
     }
 
 }
