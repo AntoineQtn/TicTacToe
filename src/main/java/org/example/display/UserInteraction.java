@@ -10,16 +10,17 @@ public class UserInteraction {
         this.view = view;
     }
 
-    public String askForRepresentation() {
-        while (true) {
-            view.displayMessage("Choose your representation (X or O): ");
-            String input = scanner.nextLine().trim().toUpperCase();
-            if (input.equals("X") || input.equals("O")) {
-                return input;
-            }
-            view.displayMessage("Invalid representation! Please type 'X' or 'O'.");
-        }
-    }
+//  Fonctionnalité à implémenter
+//    public String askForRepresentation() {
+//        while (true) {
+//            view.displayMessage("Choose your representation (X or O): ");
+//            String input = scanner.nextLine().trim().toUpperCase();
+//            if (input.equals("X") || input.equals("O")) {
+//                return input;
+//            }
+//            view.displayMessage("Invalid representation! Please type 'X' or 'O'.");
+//        }
+//    }
 
     public int[] askForPosition() {
         try {

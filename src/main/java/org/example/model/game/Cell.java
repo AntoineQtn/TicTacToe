@@ -1,9 +1,9 @@
-package org.example.game;
+package org.example.model.game;
 
-import org.example.player.Player;
+import org.example.model.game.player.Player;
 
 public class Cell {
-    Player player;
+    private Player player;
 
     public Cell(Player player) {
         this.player = player;
@@ -14,6 +14,7 @@ public class Cell {
      * @param player
      */
     public void setOwner(Player player) {
+
         this.player = player;
     }
 

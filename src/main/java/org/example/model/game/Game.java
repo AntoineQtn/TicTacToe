@@ -1,0 +1,155 @@
+package org.example.model.game;
+
+import org.example.display.UserInteraction;
+import org.example.display.View;
+import org.example.model.game.player.Player;
+
+public abstract class Game {
+
+    private final int rows;
+    private final int cols;
+    private Cell[][] board;
+//    private final Player[] player;
+//    protected View view;
+//    protected UserInteraction userInteraction;
+    private final int winningPawn;
+    private int currentPlayerIndex = 0;
+    private Player currentPlayer;
+
+    public Game(int rows, int cols, int winningPawn) {
+        this(rows, cols, winningPawn,new Cell[rows][cols]);
+//        this.userInteraction = new UserInteraction(this.view);
+    }
+
+    public Game(int rows, int cols, int winningPawn, Cell[][] board) {
+        this.rows = rows;
+        this.cols = cols;
+//        this.player = players;
+//        this.userInteraction = userInteraction;
+//        this.view = view;
+        this.board = board;
+        this.winningPawn = winningPawn;
+        this.currentPlayer = players[currentPlayerIndex];
+    }
+
+    protected void setBoard(Cell[][] board) {
+        this.board = board;
+    }
+
+    protected int getRows() {
+
+        return rows;
+    }
+
+    public int getCols() {
+
+        return cols;
+    }
+
+    public Cell[][] getBoard() {
+
+        return board;
+    }
+
+//    public View getView() {
+//
+//        return view;
+//    }
+
+    public Player[] getPlayers() {
+
+        return player;
+    }
+
+    public int getWinningPawn() {
+
+        return winningPawn;
+    }
+
+//    public View setView(View view) {
+//        this.view = view;
+//        return view;
+//    }
+
+    public void setOwner(int row, int col, Player player) {
+        getBoard()[row][col].setOwner(player);
+    }
+
+    public boolean checkDirection(Cell[][] board, int row, int col, int dirX, int dirY) {
+        Player owner = board[row][col].getOwner();
+        for (int i = 0; i < getWinningPawn(); i++) {
+            int newRow = row + i * dirX;
+            int newCol = col + i * dirY;
+
+            if (newRow < 0 || newRow >= rows || newCol < 0 || newCol >= cols) {
+                return false;
+            }
+            if (getBoard()[newRow][newCol].getOwner() != owner) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void initializeBoard() {
+        Cell[][] board = new Cell[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                board[i][j] = new Cell(null);
+            }
+        }
+        setBoard(board);
+    }
+
+    public int getSize() {
+
+        return rows * cols;
+    }
+
+    public boolean isBoardFull() {
+        for (int i = 0; i < getBoard().length; i++) {
+            for (int j = 0; j < getBoard()[0].length; j++) {
+                if (getBoard()[i][j].hasNoOwner()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+
+    public boolean hasWinner(Player player) {
+        Cell[][] board = getBoard();
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (!board[i][j].hasNoOwner() && board[i][j].getOwner() == player) {
+                    if (checkDirection(board, i, j, 0, 1) ||  // Horizontal
+                            checkDirection(board, i, j, 1, 0) ||  // Vertical
+                            checkDirection(board, i, j, 1, 1) ||  // Diagonal down-right
+                            checkDirection(board, i, j, -1, 1)) { // Diagonal up-right
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public int getCurrentPlayerIndex() {
+        return currentPlayerIndex;
+    }
+
+    public void setCurrentPlayerIndex(int currentPlayerIndex) {
+        this.currentPlayerIndex = currentPlayerIndex;
+    }
+
+}
