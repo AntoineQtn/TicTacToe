@@ -9,27 +9,31 @@ public abstract class Game {
     private final int rows;
     private final int cols;
     private Cell[][] board;
-//    private final Player[] player;
-//    protected View view;
-//    protected UserInteraction userInteraction;
+    private final Player[] player;
+    protected View view;
+    protected UserInteraction userInteraction;
     private final int winningPawn;
     private int currentPlayerIndex = 0;
     private Player currentPlayer;
+    private Game game;
 
-    public Game(int rows, int cols, int winningPawn) {
-        this(rows, cols, winningPawn,new Cell[rows][cols]);
-//        this.userInteraction = new UserInteraction(this.view);
+    protected Game(int rows, int cols, Player[] players, int winningPawn) {
+        this(rows, cols, players, winningPawn, null, new View(), new Cell[rows][cols]);
+        this.userInteraction = new UserInteraction(this.view);
+
     }
 
-    public Game(int rows, int cols, int winningPawn, Cell[][] board) {
+    protected Game(int rows, int cols, Player[] players, int winningPawn, UserInteraction userInteraction, View view, Cell[][] board) {
+
         this.rows = rows;
         this.cols = cols;
-//        this.player = players;
-//        this.userInteraction = userInteraction;
-//        this.view = view;
+        this.player = players;
+        this.userInteraction = userInteraction;
+        this.view = view;
         this.board = board;
         this.winningPawn = winningPawn;
         this.currentPlayer = players[currentPlayerIndex];
+
     }
 
     protected void setBoard(Cell[][] board) {
@@ -51,11 +55,6 @@ public abstract class Game {
         return board;
     }
 
-//    public View getView() {
-//
-//        return view;
-//    }
-
     public Player[] getPlayers() {
 
         return player;
@@ -65,11 +64,6 @@ public abstract class Game {
 
         return winningPawn;
     }
-
-//    public View setView(View view) {
-//        this.view = view;
-//        return view;
-//    }
 
     public void setOwner(int row, int col, Player player) {
         getBoard()[row][col].setOwner(player);
@@ -150,6 +144,10 @@ public abstract class Game {
 
     public void setCurrentPlayerIndex(int currentPlayerIndex) {
         this.currentPlayerIndex = currentPlayerIndex;
+    }
+
+    public Game setGame(Game game) {
+        return this.game = game;
     }
 
 }

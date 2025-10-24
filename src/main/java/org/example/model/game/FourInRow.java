@@ -1,10 +1,7 @@
 package org.example.model.game;
-
-import org.example.display.UserInteraction;
-import org.example.display.View;
 import org.example.model.game.player.Player;
 
-public class FourInRow extends Game {
+public class FourInRow extends Game  {
 
     private int rows;
     private int cols;
@@ -13,8 +10,6 @@ public class FourInRow extends Game {
         super(rows, cols, new Player[]{player1, player2}, winningPawn);
         this.rows = rows;
         this.cols = cols;
-//        this.view = new View();
-//        this.userInteraction = new UserInteraction(view);
         initializeBoard();
     }
 

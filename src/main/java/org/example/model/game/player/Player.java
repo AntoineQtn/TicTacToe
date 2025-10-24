@@ -7,6 +7,7 @@ public abstract class Player {
     private boolean isHuman;
 
     public Player(String representation) {
+
         this.representation = representation;
     }
 
@@ -19,15 +20,12 @@ public abstract class Player {
         return representation;
     }
 
-    public boolean setIsHuman(boolean isHuman) {
-        return isHuman;
+    public boolean getIsHuman() {
+
+        return isHuman = true;
+
     }
 
-    public boolean getIsHuman() {
-        return isHuman;
-    }
+    public abstract int[] move(Cell[][] board);
+
 }
-//
-//    public abstract int[] move (Cell[][] board);
-//
-//}

@@ -1,27 +1,28 @@
 package org.example;
 
 import org.example.controller.GameController;
+import org.example.display.UserInteraction;
 import org.example.display.View;
-import org.example.model.game.FourInRow;
-import org.example.model.game.TicTacToe;
-import org.example.model.game.player.ArtificialPlayer;
-import org.example.model.game.player.HumanPlayer;
+import org.example.model.game.*;
+import org.example.model.game.GameFactory;
+
 
 
 public class Main {
     public static void main(String[] args) {
         try {
-//    TicTacToe ticTacToe = new TicTacToe(3,3, new HumanPlayer(" X "), new ArtificialPlayer(" O "),3);
-//    ticTacToe.play();
-            GameController gameController = new GameController(new TicTacToe(3, 3, 3), new View(), new HumanPlayer(" X "), new ArtificialPlayer(" O "));
-            gameController.play();
-//            FourInRow fourInRow = new FourInRow(6, 7, new HumanPlayer(" X "), new ArtificialPlayer(" O "), 4);
-//            fourInRow.play();
+            GameFactory gameFactory = new GameFactory();
+            View view = new View();
+            UserInteraction ui = new UserInteraction(view);
+
+            int choice = ui.displayMenu();
+            Game choosenGame = gameFactory.choosenGame(choice);
+
+            GameController controller = new GameController(choosenGame, view, ui);
+            controller.play();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-//        Gomoku gomoku= new Gomoku(6, 7, new HumanPlayer(" X "), new ArtificialPlayer(" O "), 5);
-//        gomoku.play();
 
 
     }

@@ -2,8 +2,8 @@ package org.example.controller;
 
 import org.example.display.UserInteraction;
 import org.example.display.View;
-import org.example.model.game.Cell;
-import org.example.model.game.Game;
+import org.example.model.game.*;
+
 import org.example.model.game.player.Player;
 
 import java.util.Random;
@@ -12,18 +12,19 @@ public class GameController {
 
     private Game game;
     private View view;
-    private Player[] players;
+    private UserInteraction ui;
+    private GameFactory gameFactory;
 
 
-    public GameController(Game game, View view, Player player1, Player player2) {
+    public GameController(Game game, View view, UserInteraction ui) {
         this.game = game;
         this.view = view;
-        this.players = new Player[]{player1, player2};
+        this.ui = ui;
 
     }
 
+
     public void play() {
-        view.displayMessage("Welcome to Four in Row!");
 
         while (true) {
             displayBoard(game.getBoard());
@@ -38,7 +39,7 @@ public class GameController {
 
             if (game.hasWinner(game.getCurrentPlayer())) {
                 displayBoard(game.getBoard());
-                view.displayWinner(game.getCurrentPlayer());
+                displayWinner(game.getCurrentPlayer());
                 break;
             }
 
@@ -50,6 +51,10 @@ public class GameController {
             game.setCurrentPlayerIndex((game.getCurrentPlayerIndex() + 1) % game.getPlayers().length);
             game.setCurrentPlayer(game.getPlayers()[game.getCurrentPlayerIndex()]);
         }
+    }
+
+    public void displayWinner(Player winner) {
+        view.displayMessage("Player " + winner.getRepresentation() + " won!");
     }
 
     public void displayBoard(Cell[][] board) {
@@ -71,7 +76,6 @@ public class GameController {
         }
     }
 
-
     public int[] move(Cell[][] board) {
         if (game.getCurrentPlayer().getIsHuman()) {
             UserInteraction userInteraction = new UserInteraction(view);
@@ -82,6 +86,8 @@ public class GameController {
                 int y = move[1];
                 if (board[x][y].hasNoOwner()) {
                     break;
+                } else {
+                    view.displayOccupied();
                 }
             }
             return move;
@@ -96,5 +102,7 @@ public class GameController {
             return new int[]{x, y};
         }
     }
+
+
 
 }
