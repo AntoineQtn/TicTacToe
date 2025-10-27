@@ -26,6 +26,5 @@ public abstract class Player {
 
     }
 
-    public abstract int[] move(Cell[][] board);
 
 }

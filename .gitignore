@@ -43,3 +43,6 @@ bin/
 .DS_Store
 
 *.hprof
+
+/home/antoine.quintin@Digital-Grenoble.local/Desktop/TicTacToe/src/main/java/org/example/MainRefacto.java
+/home/antoine.quintin@Digital-Grenoble.local/Desktop/TicTacToe/src/main/java/org/example/controller/GameControllerRefacto.java

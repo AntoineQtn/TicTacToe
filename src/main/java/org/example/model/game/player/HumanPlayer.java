@@ -11,9 +11,9 @@ public class HumanPlayer extends Player {
 
     }
 
-    @Override
-    public int[] move(Cell[][] board) {
-        return new int[0];
-    }
+//    @Override
+//    public int[] move(Cell[][] board) {
+//        return new int[0];
+//    }
 
 }

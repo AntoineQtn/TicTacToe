@@ -1,5 +1,6 @@
 package org.example.display;
 
+import org.example.controller.GameState;
 import org.example.model.game.FourInRow;
 import org.example.model.game.Game;
 import org.example.model.game.Gomoku;
@@ -10,6 +11,8 @@ import org.example.model.game.player.Player;
 
 import java.util.Scanner;
 
+//import static org.example.MainRefacto.gameState;
+
 public class UserInteraction {
     private final Scanner scanner = new Scanner(System.in);
     private final View view;
@@ -19,6 +22,8 @@ public class UserInteraction {
     }
 
     public int displayMenu(){
+
+
         view.displayMessage("Welcome! What game do you want to play?");
         view.displayMessage("1 - Tic Tac Toe");
         view.displayMessage("2 - Gomoku");

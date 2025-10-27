@@ -9,10 +9,10 @@ public class ArtificialPlayer extends Player {
         super(representation);
     }
 
-    @Override
-    public int[] move(Cell[][] board) {
-        return new int[0];
-    }
+//    @Override
+//    public int[] move(Cell[][] board) {
+//        return new int[0];
+//    }
 
     public boolean getIsHuman() {
         return isHuman = false;
