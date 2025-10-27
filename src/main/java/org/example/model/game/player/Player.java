@@ -1,7 +1,5 @@
 package org.example.model.game.player;
 
-import org.example.model.game.Cell;
-
 public abstract class Player {
     private String representation;
     private boolean isHuman;

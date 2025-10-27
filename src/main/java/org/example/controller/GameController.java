@@ -3,53 +3,79 @@ package org.example.controller;
 import org.example.display.UserInteraction;
 import org.example.display.View;
 import org.example.model.game.*;
-
 import org.example.model.game.player.Player;
 
 import java.util.Random;
+
 
 public class GameController {
 
     private Game game;
     private View view;
     private UserInteraction ui;
-    private GameFactory gameFactory;
+    private GameState gameState;
 
 
     public GameController(Game game, View view, UserInteraction ui) {
         this.game = game;
         this.view = view;
         this.ui = ui;
-
+        this.gameState = GameState.INITIALIZE;
     }
 
+    public void startGame() {
+        System.out.println("Starting game");
+        while (gameState != GameState.EXITGAME) {
+            switch (gameState) {
+                case INITIALIZE:
+                    displayBoard(game.getBoard());
+                    gameState = GameState.START;
+                    break;
+                case START:
+                    play();
+                    break;
+                case DRAW:
+                    view.displayDraw();
+                    gameState = GameState.EXITGAME;
+                    break;
+                case WIN:
+                    displayWinner(game.getCurrentPlayer());
+                    gameState = GameState.EXITGAME;
+                    break;
+                default:
+                    gameState = GameState.EXITGAME;
+            }
+        }
+        System.out.println("Ending game");
+    }
 
     public void play() {
 
-        while (true) {
-            displayBoard(game.getBoard());
+        while (gameState == GameState.START) {
             view.displayMessage("Player " + game.getCurrentPlayer().getRepresentation() + ", it's your turn.");
 
             int[] move = move(game.getBoard());
             int row = move[0];
             int col = move[1];
 
+
             game.setOwner(row, col, game.getCurrentPlayer());
             view.displayMessage("Player " + game.getCurrentPlayer().getRepresentation() + "put a pawn at (" + row + ", " + col + ").");
 
-            if (game.hasWinner(game.getCurrentPlayer())) {
-                displayBoard(game.getBoard());
-                displayWinner(game.getCurrentPlayer());
+            displayBoard(game.getBoard());
+
+            if(game.hasWinner(game.getCurrentPlayer())) {
+                gameState = GameState.WIN;
                 break;
             }
 
-            if (game.isBoardFull()) {
-                displayBoard(game.getBoard());
-                view.displayDraw();
+            if(game.isBoardFull()){
+                gameState = GameState.DRAW;
                 break;
             }
             game.setCurrentPlayerIndex((game.getCurrentPlayerIndex() + 1) % game.getPlayers().length);
             game.setCurrentPlayer(game.getPlayers()[game.getCurrentPlayerIndex()]);
+
         }
     }
 
@@ -77,10 +103,13 @@ public class GameController {
     }
 
     public int[] move(Cell[][] board) {
+
         if (game.getCurrentPlayer().getIsHuman()) {
             UserInteraction userInteraction = new UserInteraction(view);
             int[] move;
             while (true) {
+                displayBoard(game.getBoard());
+
                 move = userInteraction.askForPosition();
                 int x = move[0];
                 int y = move[1];
@@ -102,7 +131,5 @@ public class GameController {
             return new int[]{x, y};
         }
     }
-
-
 
 }

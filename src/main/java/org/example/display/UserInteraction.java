@@ -11,8 +11,6 @@ import org.example.model.game.player.Player;
 
 import java.util.Scanner;
 
-//import static org.example.MainRefacto.gameState;
-
 public class UserInteraction {
     private final Scanner scanner = new Scanner(System.in);
     private final View view;
@@ -31,9 +29,6 @@ public class UserInteraction {
 
         return scanner.nextInt();
     }
-
-
-
 
 
     public int[] askForPosition() {

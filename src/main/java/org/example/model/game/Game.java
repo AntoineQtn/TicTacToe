@@ -112,9 +112,10 @@ public abstract class Game {
     }
 
     public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
 
+        return currentPlayer;
+
+    }
 
     public boolean hasWinner(Player player) {
         Cell[][] board = getBoard();
