@@ -4,7 +4,7 @@ Description :
 
 Creating a Tic Tac Toe game in java that will be run in the console.
 
-Environnement :
+Environement :
 
 - Java Development Kit (JDK): version 17 or higher.
 - Gradle: the project is compatible with Gradle 8+ and it is recommended to use the Gradle Wrapper provided (./gradlew).
@@ -108,7 +108,7 @@ class Game {
     }
 
     class GameController{
-        - Game game
+        - IGameStrategy game
         - View view
         - GameState gameState
         - UserInteraction ui
@@ -118,6 +118,23 @@ class Game {
         + dysplayBoard(Cell[][] board)
         + string displayError()
         + int[] move(Cell[][] board)
+    }
+
+    class IGameStrategy {
+        <<Interface>>
+
+Cell [][] getBoard()
+Player getCurrentPlayer()
+void setOwner(int row, int col, Player player)
+boolean hasWinner(Player player)
+boolean isBoardFull()
+void setCurrentPlayer(Player player)
+Player[] getPlayers()
+void setCurrentPlayerIndex(int row)
+int getCurrentPlayerIndex()
+int getRows()
+int getCols()   
+
     }
       
 class GameFactory {
@@ -141,6 +158,7 @@ INITIALIZE,
     GameState --> GameController
 
     Game --> Main
+    Game <.. IGameStrategy
 
     Game <|-- TicTacToe
     Game <|-- Gomoku

@@ -4,7 +4,7 @@ import org.example.display.UserInteraction;
 import org.example.display.View;
 import org.example.model.game.player.Player;
 
-public abstract class Game {
+public abstract class Game implements IGameStrategy {
 
     private final int rows;
     private final int cols;
@@ -15,7 +15,6 @@ public abstract class Game {
     private final int winningPawn;
     private int currentPlayerIndex = 0;
     private Player currentPlayer;
-    private Game game;
 
     protected Game(int rows, int cols, Player[] players, int winningPawn) {
         this(rows, cols, players, winningPawn, null, new View(), new Cell[rows][cols]);
@@ -69,6 +68,15 @@ public abstract class Game {
         getBoard()[row][col].setOwner(player);
     }
 
+    /**
+     * Method that creates
+     * @param board
+     * @param row
+     * @param col
+     * @param dirX
+     * @param dirY
+     * @return
+     */
     public boolean checkDirection(Cell[][] board, int row, int col, int dirX, int dirY) {
         Player owner = board[row][col].getOwner();
         for (int i = 0; i < getWinningPawn(); i++) {
@@ -85,6 +93,9 @@ public abstract class Game {
         return true;
     }
 
+    /**
+     * Method that create the board of cells.
+     */
     public void initializeBoard() {
         Cell[][] board = new Cell[rows][cols];
         for (int i = 0; i < rows; i++) {
@@ -100,6 +111,10 @@ public abstract class Game {
         return rows * cols;
     }
 
+    /**
+     * Method that return either all the cells of the board have been taken or not.
+     * @return
+     */
     public boolean isBoardFull() {
         for (int i = 0; i < getBoard().length; i++) {
             for (int j = 0; j < getBoard()[0].length; j++) {
@@ -117,6 +132,11 @@ public abstract class Game {
 
     }
 
+    /**
+     * Method that checks by scanning every winning directions ( calling checkDirection method ) if a player has won or not.
+     * @param player
+     * @return
+     */
     public boolean hasWinner(Player player) {
         Cell[][] board = getBoard();
 
@@ -145,10 +165,6 @@ public abstract class Game {
 
     public void setCurrentPlayerIndex(int currentPlayerIndex) {
         this.currentPlayerIndex = currentPlayerIndex;
-    }
-
-    public Game setGame(Game game) {
-        return this.game = game;
     }
 
 }

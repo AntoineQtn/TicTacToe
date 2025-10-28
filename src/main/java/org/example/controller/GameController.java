@@ -10,12 +10,18 @@ import java.util.Random;
 
 public class GameController {
 
-    private Game game;
+    private IGameStrategy game;
     private View view;
     private UserInteraction ui;
     private GameState gameState;
 
-
+    /**
+     * Controller that make connections between our models used in games and the views.
+     * It implements our state-machine that structured games and the main methods.
+     * @param game
+     * @param view
+     * @param ui
+     */
     public GameController(Game game, View view, UserInteraction ui) {
         this.game = game;
         this.view = view;
@@ -23,6 +29,9 @@ public class GameController {
         this.gameState = GameState.INITIALIZE;
     }
 
+    /**
+     * State-machine from our GameState, this method calls the methods that structured the gameplay.
+     */
     public void startGame() {
         System.out.println("Starting game");
         while (gameState != GameState.EXITGAME) {
@@ -47,6 +56,9 @@ public class GameController {
         System.out.println("Ending game");
     }
 
+    /**
+     * Method that handle changing players.
+     */
     public void play() {
 
         while (gameState == GameState.START) {
@@ -85,7 +97,10 @@ public class GameController {
         view.displayMessage("Player " + winner.getRepresentation() + " won!");
     }
 
-
+    /**
+     * Method that display our board in terminal
+     * @param board
+     */
     public void displayBoard(Cell[][] board) {
 
         int rows = board.length;
@@ -105,11 +120,21 @@ public class GameController {
         }
     }
 
+    /**
+     * Method that display the error message caused by an input out of bound input from the user.
+     * @return
+     */
     public String displayError(){
     return "Please enter numbers superior to 0 and inferior to " +
-            game.getRows()+" for the rows and, for the cols, inferior to " +game.getCols();
+            game.getRows()+" for the rows and, for the cols, inferior to " + game.getCols();
     }
 
+    /**
+     * Method that handle human and artificial player move by using the scanner informamions for the human player and the random object for the ai,
+     * all of that
+     * @param board
+     * @return
+     */
     public int[] move(Cell[][] board) {
         while (true) {
             try {

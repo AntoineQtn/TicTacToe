@@ -4,14 +4,23 @@ package org.example.display;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * View class that handle our scanner's interactions.
+ */
 public class UserInteraction {
     private final Scanner scanner = new Scanner(System.in);
     private final View view;
 
     public UserInteraction(View view) {
+
         this.view = view;
+
     }
 
+    /**
+     * Method that display games that can be played with a input error handling.
+     * @return
+     */
     public int displayMenu() {
         while (true) {
             try {
@@ -35,7 +44,10 @@ public class UserInteraction {
         }
     }
 
-
+    /**
+     * Method to ask the player in what position f the bord he wants to put it's pawn with a int error handling.
+     * @return
+     */
     public int[] askForPosition() {
         try {
             view.displayMessage("Enter line position : ");

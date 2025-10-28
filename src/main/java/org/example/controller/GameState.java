@@ -1,7 +1,7 @@
 package org.example.controller;
 
 /**
- * Metho
+ * Enum that store the possible game state.
  */
 public enum GameState {
     INITIALIZE,

@@ -1,5 +1,8 @@
 package org.example.model.game.player;
 
+/**
+ * Model Class that represents the abstraction of a player, either human or artificial.
+ */
 public abstract class Player {
     private String representation;
     private boolean isHuman;

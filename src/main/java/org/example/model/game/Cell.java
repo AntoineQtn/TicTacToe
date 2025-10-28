@@ -2,7 +2,11 @@ package org.example.model.game;
 
 import org.example.model.game.player.Player;
 
+/**
+ * Model class that represent a cell of a bord that can be taken by a player.
+ */
 public class Cell {
+
     private Player player;
 
     public Cell(Player player) {

@@ -1,7 +1,8 @@
 package org.example.model.game.player;
 
-import org.example.model.game.Cell;
-
+/**
+ * Model class that stores the boolean isHuman.
+ */
 public class ArtificialPlayer extends Player {
     private boolean isHuman = false;
 

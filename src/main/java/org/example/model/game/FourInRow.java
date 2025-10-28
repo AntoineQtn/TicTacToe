@@ -1,6 +1,9 @@
 package org.example.model.game;
 import org.example.model.game.player.Player;
 
+/**
+ * Model class that
+ */
 public class FourInRow extends Game  {
 
     private int rows;
