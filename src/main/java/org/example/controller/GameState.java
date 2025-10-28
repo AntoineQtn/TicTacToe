@@ -1,9 +1,11 @@
 package org.example.controller;
 
+/**
+ * Metho
+ */
 public enum GameState {
     INITIALIZE,
     START,
-    TURN,
     DRAW,
     WIN,
     EXITGAME;

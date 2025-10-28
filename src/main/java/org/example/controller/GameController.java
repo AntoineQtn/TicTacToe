@@ -42,8 +42,6 @@ public class GameController {
                     displayWinner(game.getCurrentPlayer());
                     gameState = GameState.EXITGAME;
                     break;
-                default:
-                    gameState = GameState.EXITGAME;
             }
         }
         System.out.println("Ending game");
