@@ -1,9 +1,15 @@
 package org.example.model.game;
 
-import org.example.display.UserInteraction;
-import org.example.display.View;
-import org.example.model.game.player.Player;
+import org.example.view.UserInteraction;
+import org.example.view.View;
+import org.example.model.Cell;
+import org.example.model.IGameStrategy;
+import org.example.model.player.Player;
 
+/**
+ * Model class that represents the abstraction of our games, implementing the essential methods of the IGameStrategy interface.
+ * It is the main entry of the GameController that handle the interactions between models and views.
+ */
 public abstract class Game implements IGameStrategy {
 
     private final int rows;
@@ -33,39 +39,6 @@ public abstract class Game implements IGameStrategy {
         this.winningPawn = winningPawn;
         this.currentPlayer = players[currentPlayerIndex];
 
-    }
-
-    protected void setBoard(Cell[][] board) {
-        this.board = board;
-    }
-
-    public int getRows() {
-
-        return rows;
-    }
-
-    public int getCols() {
-
-        return cols;
-    }
-
-    public Cell[][] getBoard() {
-
-        return board;
-    }
-
-    public Player[] getPlayers() {
-
-        return player;
-    }
-
-    public int getWinningPawn() {
-
-        return winningPawn;
-    }
-
-    public void setOwner(int row, int col, Player player) {
-        getBoard()[row][col].setOwner(player);
     }
 
     /**
@@ -106,11 +79,6 @@ public abstract class Game implements IGameStrategy {
         setBoard(board);
     }
 
-    public int getSize() {
-
-        return rows * cols;
-    }
-
     /**
      * Method that return either all the cells of the board have been taken or not.
      * @return
@@ -126,11 +94,6 @@ public abstract class Game implements IGameStrategy {
         return true;
     }
 
-    public Player getCurrentPlayer() {
-
-        return currentPlayer;
-
-    }
 
     /**
      * Method that checks by scanning every winning directions ( calling checkDirection method ) if a player has won or not.
@@ -165,6 +128,52 @@ public abstract class Game implements IGameStrategy {
 
     public void setCurrentPlayerIndex(int currentPlayerIndex) {
         this.currentPlayerIndex = currentPlayerIndex;
+    }
+
+    protected void setBoard(Cell[][] board) {
+        this.board = board;
+    }
+
+    public int getRows() {
+
+        return rows;
+    }
+
+    public int getCols() {
+
+        return cols;
+    }
+
+    public Cell[][] getBoard() {
+
+        return board;
+    }
+
+    public Player[] getPlayers() {
+
+        return player;
+    }
+
+    public int getWinningPawn() {
+
+        return winningPawn;
+    }
+
+    public void setOwner(int row, int col, Player player) {
+
+        getBoard()[row][col].setOwner(player);
+
+    }
+
+    public Player getCurrentPlayer() {
+
+        return currentPlayer;
+
+    }
+
+    public int getSize() {
+
+        return rows * cols;
     }
 
 }

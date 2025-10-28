@@ -1,10 +1,10 @@
 package org.example;
 
 import org.example.controller.GameController;
-import org.example.display.UserInteraction;
-import org.example.display.View;
-import org.example.model.game.*;
-import org.example.model.game.GameFactory;
+import org.example.view.UserInteraction;
+import org.example.view.View;
+import org.example.model.game.Game;
+import org.example.model.GameFactory;
 
 public class Main {
     public static void main(String[] args) {

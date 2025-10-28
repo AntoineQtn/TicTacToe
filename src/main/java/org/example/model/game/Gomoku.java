@@ -1,9 +1,12 @@
 package org.example.model.game;
 
-import org.example.display.UserInteraction;
-import org.example.display.View;
-import org.example.model.game.player.Player;
+import org.example.view.UserInteraction;
+import org.example.view.View;
+import org.example.model.player.Player;
 
+/**
+ * Model class for the Gomoku game.
+ */
 public class Gomoku extends Game {
     private int rows;
     private int cols;
@@ -16,7 +19,4 @@ public class Gomoku extends Game {
         this.userInteraction = new UserInteraction(view);
         initializeBoard();
     }
-
-
-
 }

@@ -1,10 +1,10 @@
 package org.example.model.game;
-import org.example.model.game.player.Player;
+import org.example.model.player.Player;
 
 /**
- * Model class that
+ * Model class that extends from Game overrideing the setOwner method.
  */
-public class FourInRow extends Game  {
+public class FourInRow extends Game {
 
     private int rows;
     private int cols;
@@ -16,6 +16,12 @@ public class FourInRow extends Game  {
         initializeBoard();
     }
 
+    /**
+     * Override method that add the specific gravity system of the foour in row.
+     * @param row
+     * @param col
+     * @param player
+     */
     @Override
     public void setOwner(int row, int col, Player player) {
 

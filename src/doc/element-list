@@ -1,0 +1,5 @@
+org.example
+org.example.controller
+org.example.view
+org.example.model.game
+org.example.model.game.player

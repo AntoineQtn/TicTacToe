@@ -1,13 +1,19 @@
 package org.example.controller;
 
-import org.example.display.UserInteraction;
-import org.example.display.View;
-import org.example.model.game.*;
-import org.example.model.game.player.Player;
+import org.example.model.GameState;
+import org.example.view.UserInteraction;
+import org.example.view.View;
+import org.example.model.Cell;
+import org.example.model.game.Game;
+import org.example.model.IGameStrategy;
+import org.example.model.player.Player;
 
 import java.util.Random;
 
-
+/**
+ * Controller that make connections between our models used in games and the views.
+ * It implements our state-machine that structured games and the main methods.
+ */
 public class GameController {
 
     private IGameStrategy game;
@@ -15,13 +21,6 @@ public class GameController {
     private UserInteraction ui;
     private GameState gameState;
 
-    /**
-     * Controller that make connections between our models used in games and the views.
-     * It implements our state-machine that structured games and the main methods.
-     * @param game
-     * @param view
-     * @param ui
-     */
     public GameController(Game game, View view, UserInteraction ui) {
         this.game = game;
         this.view = view;
