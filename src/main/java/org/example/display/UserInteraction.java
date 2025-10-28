@@ -1,5 +1,7 @@
 package org.example.display;
 
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserInteraction {
@@ -10,26 +12,39 @@ public class UserInteraction {
         this.view = view;
     }
 
-    public int displayMenu(){
+    public int displayMenu() {
+        while (true) {
+            try {
+                view.displayMessage("Welcome! What game do you want to play?");
+                view.displayMessage("1 - Tic Tac Toe");
+                view.displayMessage("2 - Gomoku");
+                view.displayMessage("3 - For In Row");
+                int choice = scanner.nextInt();
 
-        view.displayMessage("Welcome! What game do you want to play?");
-        view.displayMessage("1 - Tic Tac Toe");
-        view.displayMessage("2 - Gomoku");
-        view.displayMessage("3 - For In Row");
+                if (choice < 1 || choice > 3) {
+                    throw new Exception("Please choose between 1 and 3 !");
+                }
+                return choice;
 
-        return scanner.nextInt();
+            } catch (InputMismatchException e) {
+                scanner.nextLine();
+                view.displayMessage("Invalid input! Please enter one of the following numbers.");
+            } catch (Exception e) {
+                view.displayMessage(e.getMessage());
+            }
+        }
     }
 
 
     public int[] askForPosition() {
         try {
-            view.displayMessage("Enter line position (0-2): ");
+            view.displayMessage("Enter line position : ");
             int x = scanner.nextInt();
-            view.displayMessage("Enter column position (0-2): ");
+            view.displayMessage("Enter column position : ");
             int y = scanner.nextInt();
             return new int[]{x, y};
         } catch (Exception e) {
-            view.displayMessage("Invalid input! Please enter only numbers between 0 and 2.");
+            view.displayMessage("Invalid input! Please enter only numbers.");
             scanner.nextLine();
             return askForPosition();
         }

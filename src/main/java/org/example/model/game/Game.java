@@ -40,7 +40,7 @@ public abstract class Game {
         this.board = board;
     }
 
-    protected int getRows() {
+    public int getRows() {
 
         return rows;
     }

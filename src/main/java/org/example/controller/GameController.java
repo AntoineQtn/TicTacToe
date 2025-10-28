@@ -77,9 +77,14 @@ public class GameController {
         }
     }
 
+    /**
+     * Method that use the displayMessage method from View to print the winning player.
+     * @param winner
+     */
     public void displayWinner(Player winner) {
         view.displayMessage("Player " + winner.getRepresentation() + " won!");
     }
+
 
     public void displayBoard(Cell[][] board) {
 
@@ -100,34 +105,49 @@ public class GameController {
         }
     }
 
-    public int[] move(Cell[][] board) {
-
-        if (game.getCurrentPlayer().getIsHuman()) {
-            UserInteraction userInteraction = new UserInteraction(view);
-            int[] move;
-            while (true) {
-                displayBoard(game.getBoard());
-
-                move = userInteraction.askForPosition();
-                int x = move[0];
-                int y = move[1];
-                if (board[x][y].hasNoOwner()) {
-                    break;
-                } else {
-                    view.displayOccupied();
-                }
-            }
-            return move;
-        } else {
-            Random random = new Random();
-            int size = board.length;
-            int x, y;
-            do {
-                x = random.nextInt(size);
-                y = random.nextInt(size);
-            } while (!board[x][y].hasNoOwner());
-            return new int[]{x, y};
-        }
+    public String displayError(){
+    return "Please enter numbers superior to 0 and inferior to " +
+            game.getRows()+" for the rows and, for the cols, inferior to " +game.getCols();
     }
 
+    public int[] move(Cell[][] board) {
+        while (true) {
+            try {
+                if (game.getCurrentPlayer().getIsHuman()) {
+                    UserInteraction userInteraction = new UserInteraction(view);
+                    int[] move;
+                    while (true) {
+                        displayBoard(game.getBoard());
+
+                        move = userInteraction.askForPosition();
+                        int x = move[0];
+                        if (x > game.getRows() || x < 0) {
+                            throw new Exception(displayError());
+                        }
+                        int y = move[1];
+                        if (y > game.getCols() || y < 0) {
+                            throw new Exception(displayError());
+                        }
+                        if (board[x][y].hasNoOwner()) {
+                            break;
+                        } else {
+                            view.displayOccupied();
+                        }
+                    }
+                    return move;
+                } else {
+                    Random random = new Random();
+                    int size = board.length;
+                    int x, y;
+                    do {
+                        x = random.nextInt(size);
+                        y = random.nextInt(size);
+                    } while (!board[x][y].hasNoOwner());
+                    return new int[]{x, y};
+                }
+            } catch (Exception e) {
+                view.displayMessage(e.getMessage());
+            }
+        }
+    }
 }

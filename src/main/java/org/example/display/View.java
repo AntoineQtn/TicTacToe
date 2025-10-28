@@ -3,7 +3,10 @@ package org.example.display;
 public class View {
 
     public void displayMessage(String message) {
+
         System.out.println(message);
+
+
     }
 
     public void displayCell(String cell) {
@@ -32,5 +35,7 @@ public class View {
     public void displayDraw() {
         displayMessage("It's a draw!");
     }
+
+
 
 }

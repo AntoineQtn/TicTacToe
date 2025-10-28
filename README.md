@@ -11,6 +11,13 @@ Environnement :
 - Recommended IDE: IntelliJ IDEA (or any other Gradle-compatible Java IDE).
 - Internet connection: required to download dependencies from Maven Central (JUnit 5).
 
+Naming :
+
+We use the classical naming rules :
+- classes name in PascalCase.
+- methods and attributes in camelCase.
+- enums in UPPER_CASE.
+
 UML :
 
 ```mermaid
@@ -42,6 +49,8 @@ class Game {
         + void getPlayers()
         + void getWinningPaws()
         + void getCurrentPlayer()
+        + int getCols()
+        + int getRows()
         + void setCurrentPlayer(Player player)
         + int getCurrentPlayerIndex()
         + void setCurrentPlayerIndex()
@@ -52,7 +61,7 @@ class Game {
     class TicTacToe {
 
     }
-
+  
 
     class FourInRow {
 
@@ -93,7 +102,7 @@ class Game {
         + void displayMessage()
         + void displayCell(String cell)
         + void displayRowSeparator(int cols)
-        + void displayNewLine()
+        + void displayNewLine() 
         + void displayOccupied()
         + void displayDraw()
     }
@@ -107,9 +116,10 @@ class Game {
         + void play()
         + void displayWinner(Player player)
         + dysplayBoard(Cell[][] board)
+        + string displayError()
         + int[] move(Cell[][] board)
     }
-
+      
 class GameFactory {
 
 + Game choosenGame(int choice)
@@ -136,7 +146,7 @@ INITIALIZE,
     Game <|-- Gomoku
     Game <|-- FourInRow
 
-
+                 
     Cell --> Game
     Player --> Game
     UserInteraction --> Game
@@ -147,4 +157,5 @@ INITIALIZE,
     Player <|-- HumanPlayer
 
     GameController-->Game
+
 ```
