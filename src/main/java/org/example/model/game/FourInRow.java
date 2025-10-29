@@ -27,5 +27,4 @@ public class FourInRow extends Game  {
         }
     }
 
-
 }
