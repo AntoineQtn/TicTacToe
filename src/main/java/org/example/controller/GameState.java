@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.controller;
 
 /**
  * Enum that store the possible game state.

@@ -1,9 +1,8 @@
-package org.example.model.game;
+package org.example.controller;
 
+import org.example.model.game.Cell;
 import org.example.view.UserInteraction;
 import org.example.view.View;
-import org.example.model.Cell;
-import org.example.model.IGameStrategy;
 import org.example.model.player.Player;
 
 /**

@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.model.game;
 
 import org.example.model.player.Player;
 
@@ -20,6 +20,7 @@ public class Cell {
     public void setOwner(Player player) {
 
         this.player = player;
+
     }
 
     public Player getOwner() {

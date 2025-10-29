@@ -1,5 +1,6 @@
-package org.example.model.game;
+package org.example.model.game.playablegame;
 
+import org.example.controller.Game;
 import org.example.view.UserInteraction;
 import org.example.view.View;
 import org.example.model.player.Player;

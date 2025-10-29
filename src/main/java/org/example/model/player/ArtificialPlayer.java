@@ -11,7 +11,9 @@ public class ArtificialPlayer extends Player {
     }
 
     public boolean getIsHuman() {
+
         return isHuman = false;
+
     }
 
 }

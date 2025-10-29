@@ -1,5 +1,6 @@
-package org.example.model;
+package org.example.controller;
 
+import org.example.model.game.Cell;
 import org.example.model.player.Player;
 
 /**

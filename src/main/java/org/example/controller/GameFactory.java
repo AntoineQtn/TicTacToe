@@ -1,13 +1,15 @@
-package org.example.model;
+package org.example.controller;
 
-import org.example.model.game.FourInRow;
-import org.example.model.game.Game;
-import org.example.model.game.Gomoku;
-import org.example.model.game.TicTacToe;
+import org.example.model.game.playablegame.FourInRow;
+import org.example.model.game.playablegame.Gomoku;
+import org.example.model.game.playablegame.TicTacToe;
 import org.example.model.player.ArtificialPlayer;
 import org.example.model.player.HumanPlayer;
 import org.example.model.player.Player;
 
+/**
+ * Model class that instanciate our different games.
+ */
 public class GameFactory {
 
     public Game choosenGame(int choice) {

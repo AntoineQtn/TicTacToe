@@ -89,7 +89,7 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.example.model.game.Game,org.example.display.View,org.example.display.UserInteraction)" class="member-name-link">GameController</a><wbr>(<a href="../model/game/Game.html" title="class in org.example.model.game">Game</a>&nbsp;game,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.example.controller.Game,org.example.display.View,org.example.display.UserInteraction)" class="member-name-link">GameController</a><wbr>(<a href="../model/game/Game.html" title="class in org.example.model.game">Game</a>&nbsp;game,
  <a href="../display/View.html" title="class in org.example.view">View</a>&nbsp;view,
  <a href="../display/UserInteraction.html" title="class in org.example.view">UserInteraction</a>&nbsp;ui)</code></div>
 <div class="col-last even-row-color">
@@ -110,7 +110,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#displayBoard(org.example.model.Cell%5B%5D%5B%5D)" class="member-name-link">displayBoard</a><wbr>(<a href="../model/game/Cell.html" title="class in org.example.model.game">Cell</a>[][]&nbsp;board)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#displayBoard(org.example.model.game.Cell%5B%5D%5B%5D)" class="member-name-link">displayBoard</a><wbr>(<a href="../model/game/Cell.html" title="class in org.example.model.game">Cell</a>[][]&nbsp;board)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Method that display our board in terminal</div>
 </div>
@@ -125,7 +125,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Method that use the displayMessage method from View to print the winning player.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#move(org.example.model.Cell%5B%5D%5B%5D)" class="member-name-link">move</a><wbr>(<a href="../model/game/Cell.html" title="class in org.example.model.game">Cell</a>[][]&nbsp;board)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#move(org.example.model.game.Cell%5B%5D%5B%5D)" class="member-name-link">move</a><wbr>(<a href="../model/game/Cell.html" title="class in org.example.model.game">Cell</a>[][]&nbsp;board)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Method that handle human and artificial player move by using the scanner informamions for the human player and the random object for the ai,
  all of that</div>
@@ -158,7 +158,7 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(org.example.model.game.Game,org.example.display.View,org.example.display.UserInteraction)">
+<section class="detail" id="&lt;init&gt;(org.example.controller.Game,org.example.display.View,org.example.display.UserInteraction)">
 <h3>GameController</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GameController</span><wbr><span class="parameters">(<a href="../model/game/Game.html" title="class in org.example.model.game">Game</a>&nbsp;game,
  <a href="../display/View.html" title="class in org.example.view">View</a>&nbsp;view,
@@ -207,7 +207,7 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="displayBoard(org.example.model.Cell[][])">
+<section class="detail" id="displayBoard(org.example.model.game.Cell[][])">
 <h3>displayBoard</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">displayBoard</span><wbr><span class="parameters">(<a href="../model/game/Cell.html" title="class in org.example.model.game">Cell</a>[][]&nbsp;board)</span></div>
 <div class="block">Method that display our board in terminal</div>
@@ -228,7 +228,7 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="move(org.example.model.Cell[][])">
+<section class="detail" id="move(org.example.model.game.Cell[][])">
 <h3>move</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name">move</span><wbr><span class="parameters">(<a href="../model/game/Cell.html" title="class in org.example.model.game">Cell</a>[][]&nbsp;board)</span></div>
 <div class="block">Method that handle human and artificial player move by using the scanner informamions for the human player and the random object for the ai,

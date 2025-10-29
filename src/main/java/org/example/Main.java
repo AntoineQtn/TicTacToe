@@ -3,8 +3,8 @@ package org.example;
 import org.example.controller.GameController;
 import org.example.view.UserInteraction;
 import org.example.view.View;
-import org.example.model.game.Game;
-import org.example.model.GameFactory;
+import org.example.controller.Game;
+import org.example.controller.GameFactory;
 
 public class Main {
     public static void main(String[] args) {
